@@ -4,41 +4,51 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Transforms to act as start and end markers for the journey.
-    public Transform startMarker;
-    public Transform endMarker;
 
-    // Movement speed in units per second.
-    public float speed = 1.0F;
+    public bool moving = false;
 
-    // Time when the movement started.
-    private float startTime;
+    //this changes the speed the player moves from each block.
+    private float animationTimer = 0.1f;
 
-    // Total distance between the markers.
-    private float journeyLength;
-
-    void Start()
+    private void Update()
     {
-        startMarker.position = transform.position;
-        endMarker.position = new Vector3 (transform.position.x + 2.0f, transform.position.y, transform.position.z + 2.0f);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
+        }
 
-        // Keep a note of the time the movement started.
-        startTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
+        }
 
-        // Calculate the journey length.
-        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+        //We need to make it so that the player can only go backwards 2 or 3 times so that we can destroy the geometry further back than that.
+        //In order to do this, we will need to track how many times the player has gone backwards from his *current lane*.
+        //Otherwise, we could do a simple counter where reaching 3 deactivates S, and pressing W gives you steps back...
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
+        }
     }
 
-    // Move to the target end position.
-    void Update()
+    IEnumerator MoveFromTo(Vector3 pointA, Vector3 pointB, float time)
     {
-        // Distance moved equals elapsed time times speed..
-        float distCovered = (Time.time - startTime) * speed;
-
-        // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfJourney = distCovered / journeyLength;
-
-        // Set our position as a fraction of the distance between the markers.
-        transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
+        if (!moving)
+        { // do nothing if already moving
+            moving = true; // signals "I'm moving, don't bother me!"
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime / time; // sweeps from 0 to 1 in time seconds
+                transform.position = Vector3.Lerp(pointA, pointB, t); // set position proportional to t
+                yield return 0; // leave the routine and return here in the next frame
+            }
+            moving = false; // finished moving
+        }
     }
 }
