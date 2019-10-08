@@ -39,12 +39,17 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    private void SpawnRow(int rowType, int currentRow)
+    public void SpawnRow(int rowType, int currentRow)
     {
         for (int i = 0; i < tileCells; i++)
         {
             GameObject.Instantiate(rowObject[rowType], (posStart + new Vector3((currentRow), 0, i)), Quaternion.identity);
         }
+    }
+
+    public void RemoveRow()
+    {
+
     }
 
     private void RandomizeRow()
