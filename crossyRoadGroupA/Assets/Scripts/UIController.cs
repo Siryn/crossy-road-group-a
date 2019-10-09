@@ -7,11 +7,20 @@ public class UIController : MonoBehaviour
 {
     public GameObject startPanel;
     public GameObject creditsPanel;
+    public GameObject storePanel;
+    public GameObject endPanel;
+
+    public Text scoreText;
+    public int score = 0;
+    public Text highScoreText;
+    public Text coinsText;
+    public int coins = 0;
 
     private void Start()
     {
         startPanel.SetActive(true);
         creditsPanel.SetActive(false);
+        storePanel.SetActive(false);
     }
 
     public void OnClickQuitButton()
@@ -19,6 +28,7 @@ public class UIController : MonoBehaviour
         Application.Quit();
         print("PRINT BUTTON!!!!!!");
     }
+
     public void OnClickCreditsButton()
     {
         creditsPanel.SetActive(true);
@@ -28,8 +38,32 @@ public class UIController : MonoBehaviour
     {
         creditsPanel.SetActive(false);
     }
+
     public void OnClickPlayButton()
     {
         startPanel.SetActive(false);
+        endPanel.SetActive(false);
+    }
+
+    public void OnClickStoreButton()
+    {
+        storePanel.SetActive(true);
+    }
+
+    public void OnClickStoreBackButton()
+    {
+        storePanel.SetActive(false);
+    }
+
+    public void OnClickMainMenuButton()
+    {
+        startPanel.SetActive(true);
+        endPanel.SetActive(false);
+    }
+
+    //for when you die
+    public void OnDeathEvent()
+    {
+        endPanel.SetActive(true);
     }
 }
