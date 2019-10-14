@@ -6,33 +6,97 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public bool moving = false;
+    private bool facingBackwards = false;
 
     //this changes the speed the player moves from each block.
-    private float animationTimer = 0.1f;
+    private float animationTimer = 0.3f;
 
+    public Animator anim;
+
+    public GameObject gruntModel;
+
+    private int currentPosition = 0;
+
+    private Quaternion gruntStartingRotation;
+    private void Awake()
+    {
+        gruntStartingRotation = gruntModel.transform.rotation;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
+            facingBackwards = false;
+            gruntModel.transform.rotation = gruntStartingRotation;
+
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
+            currentPosition++;
+            if (currentPosition > GlobalVariables.playerXPosition)
+            {
+                GlobalVariables.playerXPosition++;
+                print("Player position: " + GlobalVariables.playerXPosition);
+            }
+
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
+            facingBackwards = false;
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
+
+            gruntModel.transform.rotation = gruntStartingRotation;
+
+            if (!facingBackwards)
+            {
+                gruntModel.transform.Rotate(0, -90, 0);
+            }
+            else
+            {
+                gruntModel.transform.Rotate(0, 90, 0);
+            }
+
         }
 
-        //We need to make it so that the player can only go backwards 2 or 3 times so that we can destroy the geometry further back than that.
-        //In order to do this, we will need to track how many times the player has gone backwards from his *current lane*.
-        //Otherwise, we could do a simple counter where reaching 3 deactivates S, and pressing W gives you steps back...
         if (Input.GetKeyDown(KeyCode.S))
         {
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
+            //prevents player from moving farther than 3 spaces backward
+            if (currentPosition <= (GlobalVariables.playerXPosition - 3))
+            {
+                print("you can't move farther back!");
+
+            }
+            else
+            {
+                if (!facingBackwards)
+                {
+                    facingBackwards = true;
+                    gruntModel.transform.rotation = gruntStartingRotation;
+                    gruntModel.transform.Rotate(0, 180, 0);
+                }
+
+
+                StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
+                currentPosition--;
+                print("current position: " + currentPosition);
+
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
+            facingBackwards = false;
+            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
+
+            gruntModel.transform.rotation = gruntStartingRotation;
+
+            if (!facingBackwards)
+            {
+                gruntModel.transform.Rotate(0, 90, 0);
+            }
+            else
+            {
+                gruntModel.transform.Rotate(0, -90, 0);
+            }
         }
     }
 
@@ -40,7 +104,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!moving)
         { // do nothing if already moving
-            moving = true; // signals "I'm moving, don't bother me!"
+            moving = true; // "I'm moving, don't bother me!"
+            anim.SetBool("moving", true);
             float t = 0f;
             while (t < 1f)
             {
@@ -49,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
                 yield return 0; // leave the routine and return here in the next frame
             }
             moving = false; // finished moving
+            anim.SetBool("moving", false);
         }
     }
 }
