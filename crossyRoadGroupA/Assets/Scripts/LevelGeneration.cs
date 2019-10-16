@@ -8,6 +8,7 @@ public class LevelGeneration : MonoBehaviour
     // VARIABLES
     ////////////
     public GameObject[] rowTiles = new GameObject[5];
+    public GameObject[] cellProps = new GameObject[8];
     private List<Row> rowSafe = new List<Row>();
     private List<Row> rowList = new List<Row>();
     public int randomTile = 0;
@@ -81,7 +82,7 @@ public class LevelGeneration : MonoBehaviour
         }
 
         offsetStartX = -offsetSafeX + GlobalVariables.safeRows;
-        positionSafe = new Vector3(-offsetSafeX, 0, -offsetZ);
+        positionSafe = new Vector3(-offsetSafeX, -.1f, -offsetZ);
         positionStart = positionSafe + new Vector3(GlobalVariables.safeRows, 0, 0);
         GlobalVariables.currentMaxRow = GlobalVariables.generationThreshold + offsetSafeX;
     }
@@ -90,7 +91,7 @@ public class LevelGeneration : MonoBehaviour
     {
         for (int i = 0; i < GlobalVariables.safeRows; i++)
         {
-            rowSafe.Add(new Row(rowTiles, 0, 0, (positionSafe + new Vector3(i, 0, 0))));
+            rowSafe.Add(new Row(rowTiles, cellProps, 0, 0, (positionSafe + new Vector3(i, 0, 0))));
         }
     }
 
@@ -99,14 +100,14 @@ public class LevelGeneration : MonoBehaviour
         for (int i = 0; i < GlobalVariables.tileRows; i++)
         {
             DenseSelection();
-            rowList.Add(new Row(rowTiles, randomTile, randomGeneration, (positionStart + new Vector3(i, 0, 0))));
+            rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(i, 0, 0))));
         }
     }
 
     private void AddRow() //Adds a row to the end
     {
         DenseSelection();
-        rowList.Add(new Row(rowTiles, randomTile, randomGeneration, (positionStart + new Vector3(rowList.Count, 0, 0))));
+        rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(rowList.Count, 0, 0))));
     }
 
     private void RemoveRow() //Removes a row from the beginning

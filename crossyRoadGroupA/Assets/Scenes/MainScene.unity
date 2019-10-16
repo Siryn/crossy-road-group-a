@@ -1152,6 +1152,15 @@ MonoBehaviour:
   - {fileID: -927199367670048503, guid: ae3c35c0783b4a9438e766fd3108ed9f, type: 3}
   - {fileID: -927199367670048503, guid: feb0bd6d98e164f44b0a4146e00a4211, type: 3}
   - {fileID: -927199367670048503, guid: 3fb5e27330123e74482c60f2b861ad6b, type: 3}
+  cellProps:
+  - {fileID: -927199367670048503, guid: fa8c2989c74a32f4d9ce1ffa81349a37, type: 3}
+  - {fileID: -927199367670048503, guid: 8d891b24826170740a5a3e89a8650864, type: 3}
+  - {fileID: -927199367670048503, guid: a04c31e468a0ddd429073d58da7a7774, type: 3}
+  - {fileID: -927199367670048503, guid: a04c31e468a0ddd429073d58da7a7774, type: 3}
+  - {fileID: -927199367670048503, guid: a04c31e468a0ddd429073d58da7a7774, type: 3}
+  - {fileID: -927199367670048503, guid: a04c31e468a0ddd429073d58da7a7774, type: 3}
+  - {fileID: -927199367670048503, guid: ca9487871ac79db40b583639187c22a7, type: 3}
+  - {fileID: -927199367670048503, guid: a04c31e468a0ddd429073d58da7a7774, type: 3}
   randomTile: 0
   randomGeneration: 0
 --- !u!4 &424171394
