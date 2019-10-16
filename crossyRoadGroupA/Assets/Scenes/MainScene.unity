@@ -1113,8 +1113,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 424171394}
-  - component: {fileID: 424171393}
   - component: {fileID: 424171392}
+  - component: {fileID: 424171393}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -1146,15 +1146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98012a89ac3f674eb21553408976ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rowObject:
+  rowTiles:
   - {fileID: -927199367670048503, guid: 410dbffac0bf370419417de3e15c25b2, type: 3}
   - {fileID: -927199367670048503, guid: 2e00175ad2a2f5c47ad2f809a4ea1755, type: 3}
-  - {fileID: -927199367670048503, guid: feb0bd6d98e164f44b0a4146e00a4211, type: 3}
   - {fileID: -927199367670048503, guid: ae3c35c0783b4a9438e766fd3108ed9f, type: 3}
+  - {fileID: -927199367670048503, guid: feb0bd6d98e164f44b0a4146e00a4211, type: 3}
   - {fileID: -927199367670048503, guid: 3fb5e27330123e74482c60f2b861ad6b, type: 3}
-  tileCells: 25
-  tileRows: 20
-  tileDensity: 0.75
+  randomTile: 0
+  randomGeneration: 0
 --- !u!4 &424171394
 Transform:
   m_ObjectHideFlags: 0
