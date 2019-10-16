@@ -10,10 +10,10 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] rowTiles = new GameObject[5];
     public GameObject[] cellProps = new GameObject[8];
     private List<Row> rowSafe = new List<Row>();
-    private List<Row> rowList = new List<Row>();
+    public List<Row> rowList = new List<Row>();
     public int randomTile = 0;
     public int randomGeneration = 0;
-    private int offsetSafeX = 0;
+    public int offsetSafeX = 0;
     private int offsetStartX = 0;
     private int offsetZ = 0;
     private Vector3 positionSafe = new Vector3(0, 0, 0);
@@ -32,29 +32,7 @@ public class LevelGeneration : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            if (GlobalVariables.playerXPosition == (GlobalVariables.currentMaxRow - 3))
-            {
-                GlobalVariables.currentMaxRow++;
-            }
-
-            if (GlobalVariables.playerXPosition == GlobalVariables.generationThreshold)
-            {
-                RemoveSafeZone();
-            }
-
-            if (rowList.Count <= GlobalVariables.currentMaxRow + GlobalVariables.generationThreshold)
-            {
-                AddRow();
-            }
-
-            if (GlobalVariables.currentMaxRow > GlobalVariables.generationThreshold + offsetSafeX)
-            {
-                int i = GlobalVariables.playerXPosition - GlobalVariables.generationThreshold + 1;
-                rowList[i].DestroyRow(i);
-            }
-        }
+        //Moved the row removals to the PlayerMovement script
     }
     /////////
 
@@ -104,7 +82,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    private void AddRow() //Adds a row to the end
+    public void AddRow() //Adds a row to the end
     {
         DenseSelection();
         rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(rowList.Count, 0, 0))));
@@ -115,7 +93,7 @@ public class LevelGeneration : MonoBehaviour
 
     }
 
-    private void RemoveSafeZone()
+    public void RemoveSafeZone()
     {
         foreach (Row row in rowSafe)
         {

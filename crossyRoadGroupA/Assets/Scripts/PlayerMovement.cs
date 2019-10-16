@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool moving = false;
     private bool facingBackwards = false;
+    private bool keyPressed = false;
 
     //this changes the speed the player moves from each block.
     private float animationTimer = 0.3f;
@@ -18,13 +19,15 @@ public class PlayerMovement : MonoBehaviour
     private int currentPosition = 0;
 
     private Quaternion gruntStartingRotation;
+
+    public LevelGeneration levelGenerationScript;
     private void Awake()
     {
         gruntStartingRotation = gruntModel.transform.rotation;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && !moving)
         {
             facingBackwards = false;
             gruntModel.transform.rotation = gruntStartingRotation;
@@ -36,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
                 GlobalVariables.playerXPosition++;
                 print("Player position: " + GlobalVariables.playerXPosition);
             }
-
+  
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -98,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
                 gruntModel.transform.Rotate(0, -90, 0);
             }
         }
+
     }
 
     IEnumerator MoveFromTo(Vector3 pointA, Vector3 pointB, float time)
@@ -111,6 +115,28 @@ public class PlayerMovement : MonoBehaviour
             {
                 t += Time.deltaTime / time; // sweeps from 0 to 1 in time seconds
                 transform.position = Vector3.Lerp(pointA, pointB, t); // set position proportional to t
+
+                if (GlobalVariables.playerXPosition == (GlobalVariables.currentMaxRow - 3))
+                {
+                    GlobalVariables.currentMaxRow++;
+                }
+
+                if (GlobalVariables.playerXPosition == GlobalVariables.generationThreshold)
+                {
+                    levelGenerationScript.RemoveSafeZone();
+                }
+
+                if (levelGenerationScript.rowList.Count <= GlobalVariables.currentMaxRow + GlobalVariables.generationThreshold)
+                {
+                    levelGenerationScript.AddRow();
+                }
+
+                if (GlobalVariables.currentMaxRow > GlobalVariables.generationThreshold + levelGenerationScript.offsetSafeX)
+                {
+                    int i = GlobalVariables.playerXPosition - GlobalVariables.generationThreshold + 1;
+                    levelGenerationScript.rowList[i].DestroyRow(i);
+                }
+
                 yield return 0; // leave the routine and return here in the next frame
             }
             moving = false; // finished moving
@@ -118,3 +144,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+
