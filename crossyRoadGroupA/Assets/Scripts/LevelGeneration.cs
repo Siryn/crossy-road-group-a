@@ -4,59 +4,139 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
-    private GameObject player;
-    public GameObject[] rowObject = new GameObject[5];
+    ////////////
+    // VARIABLES
+    ////////////
+    public GameObject[] rowTiles = new GameObject[5];
+    public GameObject[] cellProps = new GameObject[8];
+    private List<Row> rowSafe = new List<Row>();
+    private List<Row> rowList = new List<Row>();
+    public int randomTile = 0;
+    public int randomGeneration = 0;
+    private int offsetSafeX = 0;
+    private int offsetStartX = 0;
+    private int offsetZ = 0;
+    private Vector3 positionSafe = new Vector3(0, 0, 0);
+    private Vector3 positionStart = new Vector3(0, 0, 0);
+    ////////////
 
-    public int tileCells = 15;
-    public int tileRows = 10;
-    public float tileDensity = 0.75f;
-    private int randomRow = 0;
-
-    private Vector3 posStart = new Vector3(0, 0, 0);
-
+    /////////
+    // EVENTS
+    /////////
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        posStart = new Vector3(-1, 0, ((tileCells - 1) / -2));
-
-        InitialTerrain();
+        SetOffset();
+        SpawnSafeZone();
+        SpawnInitialTerrain();
     }
 
-    private void InitialTerrain()
+    void Update()
     {
-        for (int i = 0; i < tileRows; i++)
+        if (Input.GetKeyUp(KeyCode.W))
         {
-            RandomizeRow();
-
-            if (i < 3)
+            if (GlobalVariables.playerXPosition == (GlobalVariables.currentMaxRow - 3))
             {
-                SpawnRow(0, i);
+                GlobalVariables.currentMaxRow++;
             }
-            else
+
+            if (GlobalVariables.playerXPosition == GlobalVariables.generationThreshold)
             {
-                SpawnRow(randomRow, i);
+                RemoveSafeZone();
+            }
+
+            if (rowList.Count <= GlobalVariables.currentMaxRow + GlobalVariables.generationThreshold)
+            {
+                AddRow();
+            }
+
+            if (GlobalVariables.currentMaxRow > GlobalVariables.generationThreshold + offsetSafeX)
+            {
+                int i = GlobalVariables.playerXPosition - GlobalVariables.generationThreshold + 1;
+                rowList[i].DestroyRow(i);
+            }
+        }
+    }
+    /////////
+
+    ////////////
+    // FUNCTIONS
+    ////////////
+    private void SetOffset() //Sets safe and starting locations
+    {
+        if (GlobalVariables.safeRows % 2 != 0)
+        {
+            offsetSafeX = (GlobalVariables.safeRows - 1) / 2;
+        }
+        else
+        {
+            offsetSafeX = GlobalVariables.safeRows / 2;
+        }
+
+        if (GlobalVariables.tileCells % 2 != 0)
+        {
+            offsetZ = (GlobalVariables.tileCells - 1) / 2;
+        }
+        else
+        {
+            offsetZ = GlobalVariables.tileCells / 2;
+        }
+
+        offsetStartX = -offsetSafeX + GlobalVariables.safeRows;
+        positionSafe = new Vector3(-offsetSafeX, -.1f, -offsetZ);
+        positionStart = positionSafe + new Vector3(GlobalVariables.safeRows, 0, 0);
+        GlobalVariables.currentMaxRow = GlobalVariables.generationThreshold + offsetSafeX;
+    }
+
+    private void SpawnSafeZone() //Generates the safe zone rows
+    {
+        for (int i = 0; i < GlobalVariables.safeRows; i++)
+        {
+            rowSafe.Add(new Row(rowTiles, cellProps, 0, 0, (positionSafe + new Vector3(i, 0, 0))));
+        }
+    }
+
+    private void SpawnInitialTerrain() //Generates the initial randomized rows
+    {
+        for (int i = 0; i < GlobalVariables.tileRows; i++)
+        {
+            DenseSelection();
+            rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(i, 0, 0))));
+        }
+    }
+
+    private void AddRow() //Adds a row to the end
+    {
+        DenseSelection();
+        rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(rowList.Count, 0, 0))));
+    }
+
+    private void RemoveRow() //Removes a row from the beginning
+    {
+
+    }
+
+    private void RemoveSafeZone()
+    {
+        foreach (Row row in rowSafe)
+        {
+            for (int i = 0; i < GlobalVariables.safeRows; i++)
+            {
+                row.DestroyRow(i);
             }
         }
     }
 
-    public void SpawnRow(int rowType, int currentRow)
+    public void DenseSelection() //Generates the type of row and generation profile to spawn
     {
-        for (int i = 0; i < tileCells; i++)
+        if (Random.value < GlobalVariables.rowDensity)
         {
-            GameObject.Instantiate(rowObject[rowType], (posStart + new Vector3((currentRow), 0, i)), Quaternion.identity);
+            randomTile = Random.Range(0, rowTiles.Length);
+        }
+
+        if (Random.value < GlobalVariables.generationDensity)
+        {
+            randomGeneration = Random.Range(0, 3);
         }
     }
-
-    public void RemoveRow()
-    {
-
-    }
-
-    private void RandomizeRow()
-    {
-        if (Random.value < tileDensity)
-        {
-            randomRow = Random.Range(0, rowObject.Length);
-        }
-    }
+    ////////////
 }
