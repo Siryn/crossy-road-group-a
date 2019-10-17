@@ -8,7 +8,7 @@ public class LevelGeneration : MonoBehaviour
     // VARIABLES
     ////////////
     public GameObject[] rowTiles = new GameObject[5];
-    public GameObject[] cellProps = new GameObject[8];
+    public GameObject[] cellProps = new GameObject[9];
     private List<Row> rowSafe = new List<Row>();
     public List<Row> rowList = new List<Row>();
     public int randomTile = 0;
