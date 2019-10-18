@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DeathBox
   - Prop
+  - lilypad
   layers:
   - Default
   - TransparentFX

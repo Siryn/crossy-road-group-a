@@ -32,7 +32,10 @@ public class LevelGeneration : MonoBehaviour
 
     void Update()
     {
-        //Moved the row removals to the PlayerMovement script
+        foreach (GameObject pad in GameObject.FindGameObjectsWithTag("lilypad"))
+        {
+            pad.transform.Rotate(0, 30 * Time.deltaTime, 0);
+        }
     }
     /////////
 

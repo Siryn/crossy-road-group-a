@@ -77,62 +77,51 @@ public class Row
 
     public void SpawnforGrass(int gen, Vector3 position, int i)
     {
-        GameObject prop;
-
         switch (gen)
         {
             case 0:
                 break;
             case 1:
-                if (Random.value <= .33f)
-                {
-                    prop = GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
-                }
-                else if (Random.value >= .66f)
-                {
-                    prop = GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
-                }
-                else
-                {
-                    prop = GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
-                }
-                prop.tag = "Prop";
-                break;
-            case 2:
-                if (Random.value <= .25f)
+                if (position.z + i != 0)
                 {
                     if (Random.value <= .33f)
                     {
-                        prop = GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
                     }
                     else if (Random.value >= .66f)
                     {
-                        prop = GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
                     }
                     else
                     {
-                        prop = GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
                     }
-                    prop.tag = "Prop";
+                }
+                break;
+            case 2:
+                if (position.z + i != 0 && Random.value <= .25f)
+                {
+                    if (Random.value <= .33f)
+                    {
+                        GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
+                    }
+                    else if (Random.value >= .66f)
+                    {
+                        GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
+                    }
+                    else
+                    {
+                        GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
+                    }
                 }
                 break;
             default:
                 break;
         }
-
-        foreach (GameObject instancedProp in GameObject.FindGameObjectsWithTag("Prop"))
-        {
-            if (instancedProp.transform.position.z == 0)
-            {
-                GameObject.Destroy(instancedProp);
-            }
-        }
     }
 
     public void SpawnforRoad(int gen, Vector3 position, int i)
     {
-        GameObject prop;
-
         switch (gen)
         {
             case 0:
@@ -142,22 +131,13 @@ public class Row
                 //SpawnSemi
                 break;
             case 2:
-                if (Random.value <= .25f)
+                if (position.z + i != 0 && Random.value <= .25f)
                 {
-                    prop = GameObject.Instantiate(cellProps[5], position + new Vector3(0, .05f, i), Quaternion.identity);
-                    prop.tag = "Prop";
+                    GameObject.Instantiate(cellProps[5], position + new Vector3(0, .05f, i), Quaternion.identity);
                 }
                 break;
             default:
                 break;
-        }
-
-        foreach (GameObject instancedProp in GameObject.FindGameObjectsWithTag("Prop"))
-        {
-            if (instancedProp.transform.position.z == 0)
-            {
-                GameObject.Destroy(instancedProp);
-            }
         }
     }
 
@@ -166,7 +146,17 @@ public class Row
         switch (gen)
         {
             case 0:
-                //SpawnLilyPad
+                if (position.z + i == 0)
+                {
+                    new LilyPad(cellProps, position, i);
+                }
+                else
+                {
+                    if (Random.value <=.25f)
+                    {
+                        new LilyPad(cellProps, position, i);
+                    }
+                }
                 break;
             case 1:
                 //SpawnBoat
