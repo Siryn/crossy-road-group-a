@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject creditsPanel;
     public GameObject storePanel;
     public GameObject endPanel;
+    public GameObject player;
 
     public Text scoreText;
     public int score = 0;
@@ -21,6 +23,7 @@ public class UIController : MonoBehaviour
         startPanel.SetActive(true);
         creditsPanel.SetActive(false);
         storePanel.SetActive(false);
+        endPanel.SetActive(false);
     }
 
     public void OnClickQuitButton()
@@ -59,6 +62,13 @@ public class UIController : MonoBehaviour
     {
         startPanel.SetActive(true);
         endPanel.SetActive(false);
+        print("mainmenue");
+    }
+
+    public void OnClickPlayAgainButton()
+    {
+        SceneManager.LoadScene("andrewScene");
+        startPanel.SetActive(false);
     }
 
     //for when you die

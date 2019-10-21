@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class HandleDeath : MonoBehaviour
 {
+    public GameObject UIgo;
+    public UIController handleDeath;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        handleDeath = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class HandleDeath : MonoBehaviour
     {
         if (other.CompareTag("DeathBox"))
         {
+            handleDeath.OnDeathEvent();
             print("DEATH");
         }
     }

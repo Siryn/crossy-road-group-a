@@ -281,8 +281,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnClickPlayButton
+      - m_Target: {fileID: 1333472738}
+        m_MethodName: OnClickPlayAgainButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -382,6 +382,7 @@ MonoBehaviour:
   moving: 0
   anim: {fileID: 541643405}
   gruntModel: {fileID: 541643403}
+  gruntStartingRotation: {x: 0, y: 0, z: 0, w: 0}
   levelGenerationScript: {fileID: 209056016}
 --- !u!114 &93433441
 MonoBehaviour:
@@ -395,6 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049db54d77a10c44ab7a8c7f346c60f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIgo: {fileID: 0}
+  handleDeath: {fileID: 0}
 --- !u!136 &93433442
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -917,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &267921044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,7 +2101,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickStoreButton
         m_Mode: 1
         m_Arguments:
@@ -2617,7 +2620,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickStoreBackButton
         m_Mode: 1
         m_Arguments:
@@ -2749,7 +2752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickCreditsButton
         m_Mode: 1
         m_Arguments:
@@ -2900,7 +2903,7 @@ GameObject:
   - component: {fileID: 1333472738}
   m_Layer: 0
   m_Name: UIController
-  m_TagString: Untagged
+  m_TagString: UIController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2921,6 +2924,8 @@ MonoBehaviour:
   creditsPanel: {fileID: 360070631}
   storePanel: {fileID: 1417839964}
   endPanel: {fileID: 1502503054}
+  player: {fileID: 93433438}
+  gruntModel: {fileID: 541643403}
   scoreText: {fileID: 610128468}
   score: 0
   highScoreText: {fileID: 173444048}
@@ -3349,7 +3354,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickQuitButton
         m_Mode: 1
         m_Arguments:
@@ -3452,7 +3457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.02951169, b: 1, a: 0.7764706}
+  m_Color: {r: 0, g: 0.02951169, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3732,7 +3737,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickBackButton
         m_Mode: 1
         m_Arguments:
@@ -4305,7 +4310,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickPlayButton
         m_Mode: 1
         m_Arguments:
@@ -4738,7 +4743,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickQuitButton
         m_Mode: 1
         m_Arguments:
@@ -4870,7 +4875,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1333472738}
         m_MethodName: OnClickMainMenuButton
         m_Mode: 1
         m_Arguments:

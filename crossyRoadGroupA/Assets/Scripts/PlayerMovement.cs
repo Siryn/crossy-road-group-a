@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private int currentPosition = 0;
 
-    private Quaternion gruntStartingRotation;
+    public Quaternion gruntStartingRotation;
 
     public LevelGeneration levelGenerationScript;
     private void Awake()

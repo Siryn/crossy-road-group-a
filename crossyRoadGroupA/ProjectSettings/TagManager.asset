@@ -7,6 +7,7 @@ TagManager:
   - DeathBox
   - Prop
   - lilypad
+  - UIController
   layers:
   - Default
   - TransparentFX
