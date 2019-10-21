@@ -91,11 +91,6 @@ public class LevelGeneration : MonoBehaviour
         rowList.Add(new Row(rowTiles, cellProps, randomTile, randomGeneration, (positionStart + new Vector3(rowList.Count, 0, 0))));
     }
 
-    private void RemoveRow() //Removes a row from the beginning
-    {
-
-    }
-
     public void RemoveSafeZone()
     {
         foreach (Row row in rowSafe)

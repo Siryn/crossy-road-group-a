@@ -10,6 +10,8 @@ public class Row
     public GameObject[] rowTiles = new GameObject[5];
     public GameObject[] cellProps = new GameObject[9];
     private List<GameObject> instancedCell = new List<GameObject>();
+    private List<GameObject> listMeshes = new List<GameObject>();
+    private List<Obstacle> listObstacles = new List<Obstacle>();
     ////////////
 
     /////////////
@@ -73,6 +75,30 @@ public class Row
         {
             GameObject.Destroy(instancedCell[i]);
         }
+
+        foreach (LilyPad lilypad in listObstacles)
+        {
+            if (lilypad.transform)
+            {
+
+            }
+        }
+
+        /*foreach (GameObject mesh in listMeshes)
+        {
+            if (mesh.transform.position.x == row)
+            {
+                GameObject.Destroy(mesh);
+            }
+        }*/
+
+        foreach (Obstacle obstacle in listObstacles)
+        {
+            if (obstacle.transform)
+            {
+
+            }
+        }
     }
 
     public void SpawnforGrass(int gen, Vector3 position, int i)
@@ -86,15 +112,15 @@ public class Row
                 {
                     if (Random.value <= .33f)
                     {
-                        GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                     else if (Random.value >= .66f)
                     {
-                        GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                     else
                     {
-                        GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                 }
                 break;
@@ -103,15 +129,15 @@ public class Row
                 {
                     if (Random.value <= .33f)
                     {
-                        GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[0], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                     else if (Random.value >= .66f)
                     {
-                        GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[1], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                     else
                     {
-                        GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity);
+                        listMeshes.Add(GameObject.Instantiate(cellProps[2], position + new Vector3(0, .1f, i), Quaternion.identity));
                     }
                 }
                 break;
@@ -133,7 +159,7 @@ public class Row
             case 2:
                 if (position.z + i != 0 && Random.value <= .25f)
                 {
-                    GameObject.Instantiate(cellProps[5], position + new Vector3(0, .05f, i), Quaternion.identity);
+                    listMeshes.Add(GameObject.Instantiate(cellProps[5], position + new Vector3(0, .05f, i), Quaternion.identity));
                 }
                 break;
             default:
@@ -148,13 +174,13 @@ public class Row
             case 0:
                 if (position.z + i == 0)
                 {
-                    new LilyPad(cellProps, position, i);
+                    listObstacles.Add(new LilyPad(cellProps, position, i));
                 }
                 else
                 {
                     if (Random.value <=.25f)
                     {
-                        new LilyPad(cellProps, position, i);
+                        listObstacles.Add(new LilyPad(cellProps, position, i));
                     }
                 }
                 break;

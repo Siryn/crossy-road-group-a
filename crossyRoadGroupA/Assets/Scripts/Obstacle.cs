@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle
+public class Obstacle : MonoBehaviour
 {
     public Obstacle(GameObject[] props, Vector3 position, int i)
     {
-
+        
     }
 }
 
 public class LilyPad : Obstacle
 {
-    GameObject prop;
+    public GameObject prop;
 
     public LilyPad(GameObject[] props, Vector3 position, int i) : base(props, position, i)
     {
