@@ -6,7 +6,9 @@ public class HandleDeath : MonoBehaviour
 {
     public UIController handleDeath;
 
-    private bool onBoat = false;
+    public bool onBoat = false;
+    public GameObject boat;
+    public float offset;
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +33,9 @@ public class HandleDeath : MonoBehaviour
         if (other.CompareTag("boat"))
         {
             onBoat = true;
-
             print("boat collition");
+            offset = boat.transform.position.z - transform.position.z;
+            offset = Mathf.RoundToInt(offset);
             return;
         }
 

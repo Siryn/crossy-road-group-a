@@ -344,9 +344,10 @@ GameObject:
   - component: {fileID: 93433441}
   - component: {fileID: 93433443}
   - component: {fileID: 93433442}
+  - component: {fileID: 93433444}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,6 +398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handleDeath: {fileID: 0}
+  onBoat: 0
+  boat: {fileID: 1135955180}
+  offset: 0
 --- !u!136 &93433442
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -427,6 +431,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &93433444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93433438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559fd0ac30c09e6498e6ef2d429c12e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boat: {fileID: 1135955180}
+  moveWithBoat: {fileID: 0}
 --- !u!1 &160765284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2111,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menue
+  m_Text: Main Menu
 --- !u!222 &723286927
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2753,6 +2771,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036085198}
   m_CullTransparentMesh: 0
+--- !u!1 &1135955180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6024044505516664346, guid: 14b3af9db2443ec439818cf6f7b1cdb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 564602133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273691522
 GameObject:
   m_ObjectHideFlags: 0
