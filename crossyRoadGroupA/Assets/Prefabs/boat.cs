@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class boat : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool changeDirection = false;
+
+    private void Awake()
     {
-        
+        if (Random.value < 0.5f)
+        {
+            changeDirection = true;
+        }
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        if (changeDirection == true)
+        {
+            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z - Random.Range(20, 25));
+        }
+        else
+        {
+            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + Random.Range(0, 5));
+        }
+    }
+
     void Update()
     {
-        
+        if (changeDirection == true)
+        {
+            transform.position = transform.localPosition + new Vector3(0, 0, Random.Range(0.005f, 0.025f));
+        }
+        else
+        {
+            transform.position = transform.localPosition - new Vector3(0, 0, Random.Range(0.005f, 0.025f));
+        }
     }
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class car : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+
+    }
+
     void Update()
     {
         
