@@ -8,6 +8,8 @@ TagManager:
   - Prop
   - lilypad
   - UIController
+  - boat
+  - water
   layers:
   - Default
   - TransparentFX

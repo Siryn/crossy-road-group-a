@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HandleDeath : MonoBehaviour
 {
-    public GameObject UIgo;
     public UIController handleDeath;
+
+    private bool onBoat = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,31 @@ public class HandleDeath : MonoBehaviour
         {
             handleDeath.OnDeathEvent();
             print("DEATH");
+        }
+
+        if (other.CompareTag("boat"))
+        {
+            onBoat = true;
+
+            print("boat collition");
+            return;
+        }
+
+        if (other.CompareTag("water"))
+        {
+            if (onBoat == false)
+            {
+                handleDeath.OnDeathEvent();
+                print("DEATH");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("boat"))
+        {
+            onBoat = false;
         }
     }
 }
