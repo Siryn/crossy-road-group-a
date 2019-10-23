@@ -379,6 +379,7 @@ MonoBehaviour:
   moving: 0
   anim: {fileID: 541643405}
   gruntModel: {fileID: 541643403}
+  gruntStartingRotation: {x: 0, y: 0, z: 0, w: 0}
   levelGenerationScript: {fileID: 209056016}
 --- !u!1 &160765284
 GameObject:
@@ -2739,6 +2740,7 @@ MonoBehaviour:
   creditsPanel: {fileID: 360070631}
   storePanel: {fileID: 1417839964}
   endPanel: {fileID: 1502503054}
+  player: {fileID: 0}
   scoreText: {fileID: 610128468}
   score: 0
   highScoreText: {fileID: 173444048}
