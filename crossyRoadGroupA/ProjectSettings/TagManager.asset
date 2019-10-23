@@ -8,6 +8,7 @@ TagManager:
   - Prop
   - lilypad
   - UIController
+  - obstacle
   layers:
   - Default
   - TransparentFX

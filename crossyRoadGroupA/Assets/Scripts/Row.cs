@@ -76,13 +76,13 @@ public class Row
             GameObject.Destroy(instancedCell[i]);
         }
 
-        foreach (LilyPad lilypad in listObstacles)
+        /*foreach (LilyPad lilypad in listObstacles)
         {
             if (lilypad.transform)
             {
 
             }
-        }
+        }*/
 
         /*foreach (GameObject mesh in listMeshes)
         {
@@ -92,13 +92,13 @@ public class Row
             }
         }*/
 
-        foreach (Obstacle obstacle in listObstacles)
+        /*foreach (Obstacle obstacle in listObstacles)
         {
             if (obstacle.transform)
             {
 
             }
-        }
+        }*/
     }
 
     public void SpawnforGrass(int gen, Vector3 position, int i)

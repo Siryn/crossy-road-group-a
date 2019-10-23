@@ -13,10 +13,13 @@ public class UIController : MonoBehaviour
     public GameObject player;
 
     public Text scoreText;
-    public int score = 0;
+    //public int score = 0;
     public Text highScoreText;
     public Text coinsText;
     public int coins = 0;
+    public Text deathText;
+
+    public HighScoreManager highScoreManager;
 
     private void Start()
     {
@@ -26,10 +29,14 @@ public class UIController : MonoBehaviour
         endPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        scoreText.text = GlobalVariables.playerXPosition.ToString();
+    }
+
     public void OnClickQuitButton()
     {
         Application.Quit();
-        print("PRINT BUTTON!!!!!!");
     }
 
     public void OnClickCreditsButton()
@@ -62,12 +69,12 @@ public class UIController : MonoBehaviour
     {
         startPanel.SetActive(true);
         endPanel.SetActive(false);
-        print("mainmenue");
+        print("mainmenu");
     }
 
     public void OnClickPlayAgainButton()
     {
-        SceneManager.LoadScene("andrewScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         startPanel.SetActive(false);
     }
 
@@ -75,5 +82,20 @@ public class UIController : MonoBehaviour
     public void OnDeathEvent()
     {
         endPanel.SetActive(true);
+        highScoreManager.SaveHighScores(GlobalVariables.playerXPosition);
+        //deathText.text = "High Scores: \n Test";
+        string newString = "";
+        foreach (int score in highScoreManager.highScores)
+        {
+            //print(score);
+            newString = newString + score + "\n";
+        }
+
+        deathText.text = "High Scores: \n" + newString;
+
+        /*for (int i = 0; i < highScoreManager.highScores.Length; i++)
+        {
+            deathText.text += "" + highScoreManager.highScores[i].ToString() + "\n";
+        }*/
     }
 }

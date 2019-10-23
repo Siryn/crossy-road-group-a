@@ -21,12 +21,22 @@ public class PlayerMovement : MonoBehaviour
     public Quaternion gruntStartingRotation;
 
     public LevelGeneration levelGenerationScript;
+
+    private Vector3 forward;
     private void Awake()
     {
         gruntStartingRotation = gruntModel.transform.rotation;
+
+        forward = transform.TransformDirection(Vector3.forward);
     }
     private void Update()
     {
+
+        if (Physics.Raycast(transform.position, forward, 1))
+        {
+            print("there's something there!");
+        }
+
         if (Input.GetKeyDown(KeyCode.W) && !moving)
         {
             facingBackwards = false;
@@ -37,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
             if (currentPosition > GlobalVariables.playerXPosition)
             {
                 GlobalVariables.playerXPosition++;
-                print("Player position: " + GlobalVariables.playerXPosition);
             }
   
         }

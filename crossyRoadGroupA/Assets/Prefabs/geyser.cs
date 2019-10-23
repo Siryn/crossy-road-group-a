@@ -12,7 +12,7 @@ public class geyser : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(GeyserCR());
+        StartCoroutine(GeyserCR());
     }
 
     void Update()
@@ -20,22 +20,24 @@ public class geyser : MonoBehaviour
         transform.Rotate(0, 45 * Time.deltaTime, 0);
     }
 
-    /*IEnumerator GeyserCR()
+    IEnumerator GeyserCR()
     {
-        while (Vector3.Distance(transform.localPosition, transform.localPosition + new Vector3(0, 0.25f, 0)) > 0.05f)
+        //while (Vector3.Distance(transform.localPosition, transform.localPosition + new Vector3(0, 0.25f, 0)) > 0.05f)
+        while (transform.localPosition.y < 0.2f)
         {
             transform.position = Vector3.Lerp(transform.localPosition, new Vector3(transform.localPosition.x, 0.25f, transform.localPosition.z), Time.deltaTime);
 
             yield return null;
         }
 
-        yield return new WaitForSeconds(3f);
-
-        while (Vector3.Distance(transform.localPosition + new Vector3(0, 0.25f, 0), transform.localPosition) > 0.05f)
+        //while (Vector3.Distance(transform.localPosition + new Vector3(0, 0.25f, 0), transform.localPosition) > 0.05f)
+        while (transform.localPosition.y > 0.0f)
         {
-            transform.position = Vector3.Lerp(transform.localPosition, transform.localPosition - new Vector3(0, 0.25f, 0), Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.localPosition, new Vector3(transform.localPosition.x, 0.0f, transform.localPosition.z), Time.deltaTime);
 
             yield return null;
         }
-    }*/
+
+        yield return new WaitForSeconds(3f);
+    }
 }
