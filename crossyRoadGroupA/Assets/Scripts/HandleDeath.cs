@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class HandleDeath : MonoBehaviour
 {
-    public UIController handleDeath;
+    public UIController UIController;
 
     public bool onBoat = false;
     public GameObject boat;
     public float offset;
 
+    private bool safeChecker = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        handleDeath = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+        UIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -26,34 +28,50 @@ public class HandleDeath : MonoBehaviour
     {
         if (other.CompareTag("DeathBox"))
         {
-            handleDeath.OnDeathEvent();
+            UIController.OnDeathEvent();
             print("DEATH");
         }
 
         if (other.CompareTag("boat"))
         {
-            onBoat = true;
-            print("boat collition");
-            offset = boat.transform.position.z - transform.position.z;
-            offset = Mathf.RoundToInt(offset);
-            return;
+            print("no death");
+            safeChecker = true;
+            //return;
         }
 
         if (other.CompareTag("water"))
         {
-            if (onBoat == false)
+            //print("boat collition");
+            //offset = boat.transform.position.z - transform.position.z;
+            //offset = Mathf.RoundToInt(offset);
+            //return;
+            if (!safeChecker)
             {
-                handleDeath.OnDeathEvent();
-                print("DEATH");
+                UIController.OnDeathEvent();
+                print("death by water");
             }
+
+
         }
+
     }
 
     private void OnTriggerExit(Collider other)
-    {
+    { 
+
+        if (other.CompareTag("water"))
+        {
+            if (safeChecker)
+            {
+                UIController.OnDeathEvent();
+                print("death by water 2");
+            }
+        }
+
         if (other.CompareTag("boat"))
         {
-            onBoat = false;
+            safeChecker = false;
+            print("bye bye");
         }
     }
 }

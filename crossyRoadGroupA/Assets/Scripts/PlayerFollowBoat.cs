@@ -17,7 +17,7 @@ public class PlayerFollowBoat : MonoBehaviour
     {
         if (moveWithBoat.onBoat == true)
         {
-            transform.position = new Vector3(boat.transform.position.x, 0, boat.transform.position.z - moveWithBoat.offset);
+            //transform.position = new Vector3(boat.transform.position.x, 0, boat.transform.position.z - moveWithBoat.offset);
         }
     }
 

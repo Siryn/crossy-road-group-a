@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.Raycast(transform.position, forward, 1))
         {
-            print("there's something there!");
+            //print("there's something there!");
         }
 
         if (Input.GetKeyDown(KeyCode.W) && !moving)

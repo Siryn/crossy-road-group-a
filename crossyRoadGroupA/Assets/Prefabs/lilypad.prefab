@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7986471364429884336}
   - component: {fileID: 4461145348846901065}
   - component: {fileID: 8231710339254178023}
+  - component: {fileID: 5182223260489344724}
   m_Layer: 0
   m_Name: lilypad
-  m_TagString: Untagged
+  m_TagString: boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,3 +91,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3102a19d2ace8458dc65979967a738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5182223260489344724
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726360043270562709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99, y: 0.3, z: 0.99}
+  m_Center: {x: 0, y: 0.1, z: 0}

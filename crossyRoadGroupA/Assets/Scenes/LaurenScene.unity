@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 93433440}
   - component: {fileID: 93433442}
   - component: {fileID: 93433441}
-  - component: {fileID: 93433443}
+  - component: {fileID: 93433445}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -441,7 +441,7 @@ CapsuleCollider:
   m_Radius: 0.38
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.69, z: 0}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!54 &93433442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -458,22 +458,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &93433443
+--- !u!114 &93433445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93433438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049db54d77a10c44ab7a8c7f346c60f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 559fd0ac30c09e6498e6ef2d429c12e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handleDeath: {fileID: 1333472738}
-  onBoat: 0
-  boat: {fileID: 0}
-  offset: 0
+  boat: {fileID: 6024044505516664346, guid: 14b3af9db2443ec439818cf6f7b1cdb1, type: 3}
+  moveWithBoat: {fileID: 0}
 --- !u!1 &160765284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,6 +2856,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grunt
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 2737d1dab2905c3458b7d1e8b9c415b9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 33d9bc92b09c2ca499794bcfca7a6b19, type: 2}
     - target: {fileID: -4216859302048453862, guid: 2737d1dab2905c3458b7d1e8b9c415b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2928,11 +2931,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 2737d1dab2905c3458b7d1e8b9c415b9,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 33d9bc92b09c2ca499794bcfca7a6b19, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2737d1dab2905c3458b7d1e8b9c415b9, type: 3}
 --- !u!1 &1333472737
