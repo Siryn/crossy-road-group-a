@@ -7,8 +7,8 @@ public class Row
     ////////////
     // VARIABLES
     ////////////
-    public GameObject[] rowTiles = new GameObject[5];
-    public GameObject[] cellProps = new GameObject[9];
+    public GameObject[] rowTiles = new GameObject[3];
+    public GameObject[] cellProps = new GameObject[8];
     private List<GameObject> instancedCell = new List<GameObject>();
     private List<GameObject> listMeshes = new List<GameObject>();
     private List<Obstacle> listObstacles = new List<Obstacle>();
@@ -55,12 +55,6 @@ public class Row
                     SpawnforRoad(gen, position, i);
                     break;
                 case 2:
-                    SpawnforRoad(gen, position, i);
-                    break;
-                case 3:
-                    SpawnforWater(gen, position, i);
-                    break;
-                case 4:
                     SpawnforWater(gen, position, i);
                     break;
                 default:
@@ -75,30 +69,6 @@ public class Row
         {
             GameObject.Destroy(instancedCell[i]);
         }
-
-        /*foreach (LilyPad lilypad in listObstacles)
-        {
-            if (lilypad.transform)
-            {
-
-            }
-        }*/
-
-        /*foreach (GameObject mesh in listMeshes)
-        {
-            if (mesh.transform.position.x == row)
-            {
-                GameObject.Destroy(mesh);
-            }
-        }*/
-
-        /*foreach (Obstacle obstacle in listObstacles)
-        {
-            if (obstacle.transform)
-            {
-
-            }
-        }*/
     }
 
     public void SpawnforGrass(int gen, Vector3 position, int i)
@@ -174,21 +144,34 @@ public class Row
             case 0:
                 if (position.z + i == 0)
                 {
-                    listObstacles.Add(new LilyPad(cellProps, position, i));
+                    listMeshes.Add(GameObject.Instantiate(cellProps[6], position + new Vector3(0, .05f, i), Quaternion.identity));
                 }
                 else
                 {
                     if (Random.value <=.25f)
                     {
-                        listObstacles.Add(new LilyPad(cellProps, position, i));
+                        listMeshes.Add(GameObject.Instantiate(cellProps[6], position + new Vector3(0, .05f, i), Quaternion.identity));
                     }
                 }
                 break;
             case 1:
-                //SpawnBoat
+                if (i % 5 == 0)
+                {
+                    listMeshes.Add(GameObject.Instantiate(cellProps[7], position + new Vector3(0, .05f, i), Quaternion.identity));
+                }
                 break;
             case 2:
-                //SpawnGeyser
+                if (position.z + i == 0)
+                {
+                    listMeshes.Add(GameObject.Instantiate(cellProps[6], position + new Vector3(0, .05f, i), Quaternion.identity));
+                }
+                else
+                {
+                    if (Random.value <= .25f)
+                    {
+                        listMeshes.Add(GameObject.Instantiate(cellProps[6], position + new Vector3(0, .05f, i), Quaternion.identity));
+                    }
+                }
                 break;
             default:
                 break;

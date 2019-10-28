@@ -7,8 +7,8 @@ public class LevelGeneration : MonoBehaviour
     ////////////
     // VARIABLES
     ////////////
-    public GameObject[] rowTiles = new GameObject[5];
-    public GameObject[] cellProps = new GameObject[9];
+    public GameObject[] rowTiles = new GameObject[3];
+    public GameObject[] cellProps = new GameObject[8];
     private List<Row> rowSafe = new List<Row>();
     public List<Row> rowList = new List<Row>();
     public int randomTile = 0;
@@ -28,14 +28,6 @@ public class LevelGeneration : MonoBehaviour
         SetOffset();
         SpawnSafeZone();
         SpawnInitialTerrain();
-    }
-
-    void Update()
-    {
-        foreach (GameObject pad in GameObject.FindGameObjectsWithTag("lilypad"))
-        {
-            pad.transform.Rotate(0, 30 * Time.deltaTime, 0);
-        }
     }
     /////////
 
