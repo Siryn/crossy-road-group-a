@@ -121,10 +121,16 @@ public class Row
         switch (gen)
         {
             case 0:
-                //SpawnCar
+                if (i % 7 == 0)
+                {
+                    listMeshes.Add(GameObject.Instantiate(cellProps[3], position + new Vector3(0, .05f, i), Quaternion.identity));
+                }
                 break;
             case 1:
-                //SpawnSemi
+                if (i % 10 == 0)
+                {
+                    listMeshes.Add(GameObject.Instantiate(cellProps[4], position + new Vector3(0, .05f, i), Quaternion.identity));
+                }
                 break;
             case 2:
                 if (position.z + i != 0 && Random.value <= .25f)
