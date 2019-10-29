@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private GameObject playerRoot;
+    private bool[] surroundingResults = new bool[4];
+    private Vector3[] surroundingOffsets = new Vector3[4];
 
     public bool moving = false;
     private bool facingBackwards = false;
@@ -28,25 +31,28 @@ public class PlayerMovement : MonoBehaviour
         gruntStartingRotation = gruntModel.transform.rotation;
 
         forward = transform.TransformDirection(Vector3.forward);
+
+        playerRoot = GameObject.FindGameObjectWithTag("Player");
+        InitializeSurroundings();
     }
     private void Update()
     {
-
-        if (Physics.Raycast(transform.position, forward, 1))
-        {
-            //print("there's something there!");
-        }
 
         if (Input.GetKeyDown(KeyCode.W) && !moving)
         {
             facingBackwards = false;
             gruntModel.transform.rotation = gruntStartingRotation;
 
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
-            currentPosition++;
-            if (currentPosition > GlobalVariables.playerXPosition)
+            ScanSurroundings();
+
+            if (!surroundingResults[0])
             {
-                GlobalVariables.playerXPosition++;
+                StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
+                currentPosition++;
+                if (currentPosition > GlobalVariables.playerXPosition)
+                {
+                    GlobalVariables.playerXPosition++;
+                }
             }
   
         }
@@ -54,7 +60,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             facingBackwards = false;
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
+
+            ScanSurroundings();
+
+            if (!surroundingResults[2])
+            {
+                StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
+            }
 
             gruntModel.transform.rotation = gruntStartingRotation;
 
@@ -86,9 +98,14 @@ public class PlayerMovement : MonoBehaviour
                     gruntModel.transform.Rotate(0, 180, 0);
                 }
 
+                ScanSurroundings();
 
-                StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
-                currentPosition--;
+                if (!surroundingResults[1])
+                {
+                    StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
+                    currentPosition--;
+                }
+
                 print("current position: " + currentPosition);
 
             }
@@ -97,7 +114,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             facingBackwards = false;
-            StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
+
+            ScanSurroundings();
+
+            if (!surroundingResults[3])
+            {
+                StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
+            }
 
             gruntModel.transform.rotation = gruntStartingRotation;
 
@@ -150,6 +173,37 @@ public class PlayerMovement : MonoBehaviour
             }
             moving = false; // finished moving
             anim.SetBool("moving", false);
+        }
+    }
+
+    private void InitializeSurroundings()
+    {
+        surroundingOffsets[0] = new Vector3(100.0f, 0.0f, 0.0f);
+        surroundingOffsets[1] = new Vector3(-100.0f, 0.0f, 0.0f);
+        surroundingOffsets[2] = new Vector3(0.0f, 0.0f, 100.0f);
+        surroundingOffsets[3] = new Vector3(0.0f, 0.0f, -100.0f);
+    }
+
+    private void ScanSurroundings()
+    {
+        foreach (GameObject obstacle in GameObject.FindGameObjectsWithTag("obstacle"))
+        {
+            for (int i = 0; i < surroundingOffsets.Length; i++)
+            {
+                if (obstacle.transform.position.x == playerRoot.transform.position.x + surroundingOffsets[i].x && obstacle.transform.position.z == playerRoot.transform.position.z + surroundingOffsets[i].z)
+                {
+                    surroundingResults[i] = true;
+                }
+                else
+                {
+                    surroundingResults[i] = false;
+                }
+            }
+        }
+
+        foreach (bool boolean in surroundingResults)
+        {
+            print(boolean);
         }
     }
 }
