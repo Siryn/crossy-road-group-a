@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour
 {
     public GameObject startPanel;
     public GameObject creditsPanel;
-    public GameObject storePanel;
     public GameObject endPanel;
     public GameObject player;
 
@@ -25,7 +24,6 @@ public class UIController : MonoBehaviour
     {
         startPanel.SetActive(true);
         creditsPanel.SetActive(false);
-        storePanel.SetActive(false);
         endPanel.SetActive(false);
     }
 
@@ -53,16 +51,6 @@ public class UIController : MonoBehaviour
     {
         startPanel.SetActive(false);
         endPanel.SetActive(false);
-    }
-
-    public void OnClickStoreButton()
-    {
-        storePanel.SetActive(true);
-    }
-
-    public void OnClickStoreBackButton()
-    {
-        storePanel.SetActive(false);
     }
 
     public void OnClickMainMenuButton()

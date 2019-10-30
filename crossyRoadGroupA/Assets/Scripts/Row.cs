@@ -135,7 +135,7 @@ public class Row
             case 2:
                 if (position.z + i != 0 && Random.value <= .25f)
                 {
-                    listMeshes.Add(GameObject.Instantiate(cellProps[5], position + new Vector3(0, 0.1f, i), Quaternion.identity));
+                    //listMeshes.Add(GameObject.Instantiate(cellProps[5], position + new Vector3(0, 0.1f, i), Quaternion.identity));
                 }
                 break;
             default:
@@ -147,7 +147,7 @@ public class Row
     {
         switch (gen)
         {
-            case 0:
+            case 0: case 1:
                 if (position.z + i == 0)
                 {
                     listMeshes.Add(GameObject.Instantiate(cellProps[6], position + new Vector3(0, .05f, i), Quaternion.identity));
@@ -160,12 +160,12 @@ public class Row
                     }
                 }
                 break;
-            case 1:
+            /*case 1:
                 if (i % 5 == 0)
                 {
                     listMeshes.Add(GameObject.Instantiate(cellProps[7], position + new Vector3(0, .05f, i), Quaternion.identity));
                 }
-                break;
+                break;*/
             case 2:
                 if (position.z + i == 0)
                 {

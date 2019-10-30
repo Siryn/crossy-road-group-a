@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private bool[] surroundingResults = new bool[4];
     private Vector3[] surroundingOffsets = new Vector3[4];
 
+    public bool cannotDie;
+    public bool canDrown;
+
     public bool moving = false;
     private bool facingBackwards = false;
     private bool keyPressed = false;
@@ -24,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public Quaternion gruntStartingRotation;
 
     public LevelGeneration levelGenerationScript;
+    public UIController UIController;
 
     private Vector3 forward;
     private void Awake()
@@ -33,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
         forward = transform.TransformDirection(Vector3.forward);
 
         InitializeSurroundings();
+
+        UIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
     }
     private void Update()
     {
@@ -176,6 +182,9 @@ public class PlayerMovement : MonoBehaviour
             }
             moving = false; // finished moving
             anim.SetBool("moving", false);
+            CheckForLilyPad();
+            CheckForWater();
+            DeathByWater();
         }
     }
 
@@ -208,6 +217,48 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < surroundingResults.Length; i++)
         {
             surroundingResults[i] = false;
+        }
+    }
+
+    private void CheckForLilyPad()
+    {
+        foreach (GameObject lilypad in GameObject.FindGameObjectsWithTag("lilypad"))
+        {
+            if (transform.position.x == lilypad.transform.position.x && transform.position.z == lilypad.transform.position.z)
+            {
+                cannotDie = true;
+                return;
+            }
+            else
+            {
+                cannotDie = false;
+            }
+        }
+    }
+
+    private void CheckForWater()
+    {
+        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("water"))
+        {
+            if (transform.position.x == tile.transform.position.x && transform.position.z == tile.transform.position.z)
+            {
+                canDrown = true;
+                //print("you can drown");
+                return;
+            }
+            else
+            {
+                canDrown = false;
+                print("you can't drown");
+            }
+        }
+    }
+
+    private void DeathByWater()
+    {
+        if (!cannotDie && canDrown)
+        {
+            UIController.OnDeathEvent();
         }
     }
 }

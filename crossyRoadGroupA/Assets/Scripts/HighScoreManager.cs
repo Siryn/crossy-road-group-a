@@ -31,22 +31,13 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveHighScores(int newScore)
     {
-        /*highScores[0] = 22;
-        highScores[1] = 21;
-        highScores[2] = 15;
-        highScores[3] = 12;
-        highScores[4] = 11;
-        highScores[5] = 8;
-        highScores[6] = 3;
-        highScores[7] = newScore;
-        highScores[8] = 0;
-        highScores[9] = 0;*/
 
         for (int i = 0; i < highScores.Length; i++)
         {
             if (newScore > highScores[i])
             {
                 highScores[i] = newScore;
+                return;
             }
         }
 

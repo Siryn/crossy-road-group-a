@@ -5,6 +5,7 @@ using UnityEngine;
 public class HandleDeath : MonoBehaviour
 {
     public UIController UIController;
+    public PlayerMovement playerMovement;
 
     public bool onBoat = false;
     public GameObject boat;
@@ -16,6 +17,7 @@ public class HandleDeath : MonoBehaviour
     void Start()
     {
         UIController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -30,28 +32,6 @@ public class HandleDeath : MonoBehaviour
         {
             UIController.OnDeathEvent();
             print("DEATH");
-        }
-
-        if (other.CompareTag("boat"))
-        {
-            print("no death");
-            safeChecker = true;
-            //return;
-        }
-
-        if (other.CompareTag("water"))
-        {
-            //print("boat collition");
-            //offset = boat.transform.position.z - transform.position.z;
-            //offset = Mathf.RoundToInt(offset);
-            //return;
-            if (!safeChecker)
-            {
-                UIController.OnDeathEvent();
-                print("death by water");
-            }
-
-
         }
 
     }

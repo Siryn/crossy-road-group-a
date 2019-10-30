@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2994973367803203663}
   - component: {fileID: 8839652390461353142}
   - component: {fileID: 7408905485931147267}
+  - component: {fileID: 7557457114543923758}
   m_Layer: 0
   m_Name: semi
-  m_TagString: Untagged
+  m_TagString: DeathBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,3 +96,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d479f2a52ace68b4a88d960245125edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellProps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!65 &7557457114543923758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102201965738956906}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.875, y: 0.875, z: 2.813881}
+  m_Center: {x: 0, y: 0.4375, z: 1.2805595}

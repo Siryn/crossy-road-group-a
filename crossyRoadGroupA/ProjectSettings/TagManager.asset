@@ -10,6 +10,7 @@ TagManager:
   - UIController
   - generator
   - obstacle
+  - lilypad
   layers:
   - Default
   - TransparentFX
