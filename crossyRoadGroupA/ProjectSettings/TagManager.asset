@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - boat
-  - obstacle
   - water
   - DeathBox
   - UIController
   - generator
+  - obstacle
   layers:
   - Default
   - TransparentFX

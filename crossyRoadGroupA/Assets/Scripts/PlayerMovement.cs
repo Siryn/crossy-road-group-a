@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
         forward = transform.TransformDirection(Vector3.forward);
 
-        playerRoot = GameObject.FindGameObjectWithTag("Player");
         InitializeSurroundings();
     }
     private void Update()
@@ -43,10 +42,11 @@ public class PlayerMovement : MonoBehaviour
             facingBackwards = false;
             gruntModel.transform.rotation = gruntStartingRotation;
 
-            ScanSurroundings();
+            ScanSurroundings(0);
 
             if (!surroundingResults[0])
             {
+                ResetSurroundings();
                 StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(1f, 0, 0), animationTimer));
                 currentPosition++;
                 if (currentPosition > GlobalVariables.playerXPosition)
@@ -61,10 +61,11 @@ public class PlayerMovement : MonoBehaviour
         {
             facingBackwards = false;
 
-            ScanSurroundings();
+            ScanSurroundings(2);
 
             if (!surroundingResults[2])
             {
+                ResetSurroundings();
                 StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, 1f), animationTimer));
             }
 
@@ -98,10 +99,11 @@ public class PlayerMovement : MonoBehaviour
                     gruntModel.transform.Rotate(0, 180, 0);
                 }
 
-                ScanSurroundings();
+                ScanSurroundings(1);
 
                 if (!surroundingResults[1])
                 {
+                    ResetSurroundings();
                     StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(-1f, 0, 0), animationTimer));
                     currentPosition--;
                 }
@@ -115,10 +117,11 @@ public class PlayerMovement : MonoBehaviour
         {
             facingBackwards = false;
 
-            ScanSurroundings();
+            ScanSurroundings(3);
 
             if (!surroundingResults[3])
             {
+                ResetSurroundings();
                 StartCoroutine(MoveFromTo(transform.position, transform.position + new Vector3(0, 0, -1f), animationTimer));
             }
 
@@ -178,32 +181,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void InitializeSurroundings()
     {
-        surroundingOffsets[0] = new Vector3(100.0f, 0.0f, 0.0f);
-        surroundingOffsets[1] = new Vector3(-100.0f, 0.0f, 0.0f);
-        surroundingOffsets[2] = new Vector3(0.0f, 0.0f, 100.0f);
-        surroundingOffsets[3] = new Vector3(0.0f, 0.0f, -100.0f);
+        surroundingOffsets[0] = new Vector3(1, 0, 0);
+        surroundingOffsets[1] = new Vector3(-1, 0, 0);
+        surroundingOffsets[2] = new Vector3(0, 0, 1);
+        surroundingOffsets[3] = new Vector3(0, 0, -1);
     }
 
-    private void ScanSurroundings()
+    private void ScanSurroundings(int direction)
     {
         foreach (GameObject obstacle in GameObject.FindGameObjectsWithTag("obstacle"))
         {
-            for (int i = 0; i < surroundingOffsets.Length; i++)
+            if (transform.position == obstacle.transform.position - surroundingOffsets[direction])
             {
-                if (obstacle.transform.position.x == playerRoot.transform.position.x + surroundingOffsets[i].x && obstacle.transform.position.z == playerRoot.transform.position.z + surroundingOffsets[i].z)
-                {
-                    surroundingResults[i] = true;
-                }
-                else
-                {
-                    surroundingResults[i] = false;
-                }
+                surroundingResults[direction] = true;
+            }
+
+            if (GlobalVariables.playerXPosition - obstacle.transform.position.x >= 15)
+            {
+                Destroy(obstacle.gameObject);
             }
         }
+    }
 
-        foreach (bool boolean in surroundingResults)
+    private void ResetSurroundings()
+    {
+        for (int i = 0; i < surroundingResults.Length; i++)
         {
-            print(boolean);
+            surroundingResults[i] = false;
         }
     }
 }

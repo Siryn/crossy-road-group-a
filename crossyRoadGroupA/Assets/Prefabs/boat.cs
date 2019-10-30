@@ -27,6 +27,11 @@ public class boat : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (GlobalVariables.playerXPosition - transform.position.x >= 15)
+        {
+            Destroy(gameObject);
+        }
     }
 
         /*private bool changeDirection = false;

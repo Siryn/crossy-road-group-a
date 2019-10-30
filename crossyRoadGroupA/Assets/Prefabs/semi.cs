@@ -27,5 +27,10 @@ public class semi : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (GlobalVariables.playerXPosition - transform.position.x >= 15)
+        {
+            Destroy(gameObject);
+        }
     }
 }

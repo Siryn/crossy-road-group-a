@@ -135,7 +135,7 @@ public class Row
             case 2:
                 if (position.z + i != 0 && Random.value <= .25f)
                 {
-                    listMeshes.Add(GameObject.Instantiate(cellProps[5], position + new Vector3(0, .05f, i), Quaternion.identity));
+                    listMeshes.Add(GameObject.Instantiate(cellProps[5], position + new Vector3(0, 0.1f, i), Quaternion.identity));
                 }
                 break;
             default:

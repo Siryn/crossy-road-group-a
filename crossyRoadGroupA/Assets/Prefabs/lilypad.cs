@@ -13,5 +13,10 @@ public class lilypad : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, 30 * Time.deltaTime, 0);
+
+        if (GlobalVariables.playerXPosition - transform.position.x >= 15)
+        {
+            Destroy(gameObject);
+        }
     }
 }
