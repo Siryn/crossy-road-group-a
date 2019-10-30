@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
                     currentPosition--;
                 }
 
-                print("current position: " + currentPosition);
+                //print("current position: " + currentPosition);
 
             }
         }
@@ -243,13 +243,11 @@ public class PlayerMovement : MonoBehaviour
             if (transform.position.x == tile.transform.position.x && transform.position.z == tile.transform.position.z)
             {
                 canDrown = true;
-                //print("you can drown");
                 return;
             }
             else
             {
                 canDrown = false;
-                print("you can't drown");
             }
         }
     }

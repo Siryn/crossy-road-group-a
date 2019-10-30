@@ -5,10 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public int[] highScores;
+    //public int[] highScores;
+    public List<int> highScores;
 
     public SaveData()
     {
-        highScores = new int[10];
+        highScores = new List<int>(new int[10]);
     }
 }

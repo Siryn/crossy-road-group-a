@@ -20,7 +20,7 @@ public class car : MonoBehaviour
 
     void Update()
     {
-        transform.position = transform.localPosition + new Vector3(0, 0, Random.Range(0.005f, 0.025f));
+        transform.position = transform.localPosition + new Vector3(0, 0, Random.Range(0.01f, 0.05f));
 
         if (transform.position.z >= 7 && respawned == false)
         {

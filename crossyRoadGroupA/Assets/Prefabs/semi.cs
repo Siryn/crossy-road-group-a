@@ -15,7 +15,7 @@ public class semi : MonoBehaviour
 
     void Update()
     {
-        transform.position = transform.localPosition - new Vector3(0, 0, Random.Range(0.0025f, 0.01f));
+        transform.position = transform.localPosition - new Vector3(0, 0, Random.Range(0.008f, 0.02f));
 
         if (transform.position.z <= -7 && respawned == false)
         {

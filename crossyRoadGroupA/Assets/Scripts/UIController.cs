@@ -30,6 +30,14 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         scoreText.text = GlobalVariables.playerXPosition.ToString();
+        if (GlobalVariables.playerXPosition < highScoreManager.highScores[0])
+        {
+            highScoreText.text = highScoreManager.highScores[0].ToString();
+        }
+        else
+        {
+            highScoreText.text = GlobalVariables.playerXPosition.ToString();
+        }
     }
 
     public void OnClickQuitButton()
@@ -53,17 +61,11 @@ public class UIController : MonoBehaviour
         endPanel.SetActive(false);
     }
 
-    public void OnClickMainMenuButton()
-    {
-        startPanel.SetActive(true);
-        endPanel.SetActive(false);
-        print("mainmenu");
-    }
-
     public void OnClickPlayAgainButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        startPanel.SetActive(false);
+        ResetGlobalVariables();
+        highScoreManager.ReadHighScores();
     }
 
     //for when you die
@@ -71,19 +73,25 @@ public class UIController : MonoBehaviour
     {
         endPanel.SetActive(true);
         highScoreManager.SaveHighScores(GlobalVariables.playerXPosition);
-        //deathText.text = "High Scores: \n Test";
+
         string newString = "";
         foreach (int score in highScoreManager.highScores)
         {
-            //print(score);
             newString = newString + score + "\n";
         }
 
         deathText.text = "High Scores: \n" + newString;
 
-        /*for (int i = 0; i < highScoreManager.highScores.Length; i++)
-        {
-            deathText.text += "" + highScoreManager.highScores[i].ToString() + "\n";
-        }*/
+    }
+    public void ResetGlobalVariables()
+    {
+        GlobalVariables.playerXPosition = 0;
+        GlobalVariables.currentMaxRow = 0;
+        GlobalVariables.tileCells = 15;
+        GlobalVariables.tileRows = 15;
+        GlobalVariables.safeRows = 11;
+        GlobalVariables.generationThreshold = 15;
+        GlobalVariables.rowDensity = 0.75f;
+        GlobalVariables.generationDensity = 0.75f;
     }
 }
